@@ -1,6 +1,11 @@
 <?php
     require 'header.php';
-    require 'oeuvres.php';
+    //require 'oeuvres.php';
+    require 'database.php';
+
+    $bdd = connection();
+
+    $oeuvres = $bdd->query('SELECT * FROM oeuvres');
 
     // Si l'URL ne contient pas d'id, on redirige sur la page d'accueil
     if(empty($_GET['id'])) {
@@ -26,11 +31,11 @@
 
 <article id="detail-oeuvre">
     <div id="img-oeuvre">
-        <img src="<?= $oeuvre['image'] ?>" alt="<?= $oeuvre['titre'] ?>">
+        <img src="<?= $oeuvre['url'] ?>" alt="<?= $oeuvre['titre'] ?>">
     </div>
     <div id="contenu-oeuvre">
         <h1><?= $oeuvre['titre'] ?></h1>
-        <p class="description"><?= $oeuvre['artiste'] ?></p>
+        <p class="description"><?= $oeuvre['auteur'] ?></p>
         <p class="description-complete">
              <?= $oeuvre['description'] ?>
         </p>
